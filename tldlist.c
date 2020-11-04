@@ -32,7 +32,7 @@ struct tlditerator{
 // Start of helper functions:
 void reheight(TLDNode *node){
     if (node != NULL){
-        curr_max_height = 0
+        int curr_max_height = 0
         if (node->left->height > node->right->height){
             curr_max_height = node->left->height;
         } else {
@@ -47,7 +47,7 @@ void setBalance(TLDNode *n){
     n->balance = (n->right->height - n->left->height);
 }
 
-TLDNode rotateLeft(TLDNode *a){
+TLDNode *rotateLeft(TLDNode *a){
     TLDNode *b = malloc(sizeof(TLDNode));
     b = a->right;
     b -> parent = a->parent;
@@ -73,7 +73,7 @@ TLDNode rotateLeft(TLDNode *a){
     return b;
 }
 
-TLDNode rotateRight(TLDNode *a){
+TLDNode *rotateRight(TLDNode *a){
     TLDNode *b = malloc(sizeof(TLDNode));
     b = a->left;
     b->parent = a->parent;
@@ -101,12 +101,12 @@ TLDNode rotateRight(TLDNode *a){
     return b;
 }
 
-TLDNode rotateLeftThenRight(TLDNode *n) {
+TLDNode *rotateLeftThenRight(TLDNode *n) {
     n->left = rotateLeft(n->left);
     return rotateRight(n);
 }
 
-TLDNode rotateRightThenLeft(TLDNode *n){
+TLDNode *rotateRightThenLeft(TLDNode *n){
     n->right = rotateRight;
     return rotateLeft(n);
 }
@@ -130,13 +130,17 @@ TLDList tldlist_create(Date *begin, Date *end){
     if (date_compare(begin,end) < 0){
         TLDNode *root = NULL;
         TLDList *new_list = malloc(sizeof(TLDList));
+		new_list -> begin = begin;
+        new_list -> end = end;
+        new_list -> root = root;
+        new_list -> count = 0;
         if (new_list == NULL){
             return NULL;
         } else {
-            new_list -> begin = begin;
-            new_list -> end = end;
-            new_list -> root = root;
-            new_list -> count = 0;
+            //new_list -> begin = begin;
+            //new_list -> end = end;
+            //new_list -> root = root;
+            //new_list -> count = 0;
             return new_list;
         }
     } else {
@@ -150,8 +154,8 @@ void tldlist_destroy(TLDList *tld){
 
 int tldlist_add(TLDList *tld, char *hostname, Date *d){
     char *host;
-    if (date_compare(tld.begin, d) < 0 && date_compare(tld.end, d) > 0){
-        char *host_orig = strrchr(hostname, ".")
+    if (date_compare(tld->begin, d) < 0 && date_compare(tld->end, d) > 0){
+        char *host_orig = strrchr(hostname, ".");
         if (host[0] == "."){
             host = tolower(host_orig + 1);
         } else {
@@ -170,13 +174,13 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
         TLDNode *node = malloc(sizeof(TLDNode));
         node = tld->root;
         while (true){
-            if (strcmp(node.host,host) == 0) { return 0}
+            if (strcmp(node.host,host) == 0) { return 0;}
 
             TLDNode *parent_node = malloc(sizeof(TLDNode));
             parent_node = node;
 
-            bool goLeft = strcmp(node.host, host);
-            node = goLeft ? node.left : node.right;
+            bool goLeft = strcmp(node->host, host);
+            node = goLeft ? node->left : node->right;
 
             if (node == NULL){
                 if (goLeft) {

@@ -39,7 +39,7 @@ Date *date_duplicate(Date *d){
 int date_compare(Date *date1, Date *date2){
 
 
-    if (date1->year<date2->year || (date1->year>=date2->year && date1->month<date2->month) || (date1->year>=date2->year && day1->month>=day2->month && date1->day<date2->day)){
+    if (date1->year<date2->year || (date1->year>=date2->year && date1->month<date2->month) || (date1->year>=date2->year && date1->month>=date2->month && date1->day<date2->day)){
         return -999;
     } else if (date1->year == date2->year && date1->month == date2->month && date1->day == date2->day){
         return 0;
