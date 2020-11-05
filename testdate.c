@@ -1,6 +1,6 @@
-include "stdio.h"
-#include "Date.h"
-#include "Date.c"
+#include <stdio.h>
+#include "date.h"
+#include "date.c"
 
 int main()
 {
