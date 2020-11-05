@@ -118,7 +118,7 @@ TLDNode *rotateRightThenLeft(TLDNode *n){
     return rotateLeft(n);
 }
 
-void rebalance(TLDNode *n){
+void rebalance(TLDNode *n, TLDList *tld){
     setBalance(n);
 
     if (n -> balance == -2){
@@ -135,7 +135,9 @@ void rebalance(TLDNode *n){
 		}
 		
 		if (n->parent != NULL) {
-			rebalance(n->parent);
+			rebalance(n->parent, tld);
+		} else {
+			tld->root = n;
 		}
     }
 }
@@ -211,7 +213,7 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
                     parent_node -> right = curr_node_right;
                 }
                 tld -> count += 1;
-                rebalance(parent_node);
+                rebalance(parent_node, tld);
                 break;
             }
         }
