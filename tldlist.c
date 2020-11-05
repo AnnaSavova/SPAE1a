@@ -57,10 +57,8 @@ void setBalance(TLDNode *n){
 }
 
 TLDNode *rotateLeft(TLDNode *a){
-    //TLDNode *b = (TLDNode *)malloc(sizeof(TLDNode));
-	//free(b); //what am i doing, who knows
     TLDNode *b = a->right;
-	free(b->parent); //attempt to fix ;( 
+	free(b->parent);
     b -> parent = a->parent;
 
     a->right = b->left;
@@ -85,7 +83,6 @@ TLDNode *rotateLeft(TLDNode *a){
 }
 
 TLDNode *rotateRight(TLDNode *a){
-    //TLDNode *b = malloc(sizeof(TLDNode));
     TLDNode *b = a->left;
     b->parent = a->parent;
 
@@ -116,7 +113,7 @@ TLDNode *rotateLeftThenRight(TLDNode *n) {
     return rotateRight(n);
 }
 
-TLDNode *rotateRightThenLeft(TLDNode *n){ //restored * to rotate
+TLDNode *rotateRightThenLeft(TLDNode *n){
     n->right = rotateRight(n->right);
     return rotateLeft(n);
 }
@@ -143,8 +140,6 @@ void rebalance(TLDNode *n, TLDList *tld){
     } else {
         tld->root = n;
     }
-	// atempt fix
-	//free(n);
 	
 }
 // End of helper functions
@@ -161,10 +156,6 @@ TLDList *tldlist_create(Date *begin, Date *end){
         if (new_list == NULL){
             return NULL;
         } else {
-            //new_list -> begin = begin;
-            //new_list -> end = end;
-            //new_list -> root = root;
-            //new_list -> count = 0;
             return new_list;
         }
     } else {
@@ -196,7 +187,6 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
 			free(root_orig);
         }
 
-        //TLDNode *node = malloc(sizeof(TLDNode));
         TLDNode *node = tld->root;
         while (1){
             if (strcmp(node->host,host) == 0) {
@@ -205,7 +195,6 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
 				return 0;
 			}
 
-            //TLDNode *parent_node = malloc(sizeof(TLDNode));
             TLDNode *parent_node = node;
 
             bool goLeft = strcmp(node->host, host);
@@ -227,14 +216,10 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
                 }
                 tld -> count += 1;
                 rebalance(parent_node, tld);
-				// attempt to fix
 				free(parent_node);
                 break;
             }
-		// attempt to fix
 		free(parent_node);
-		// attempt to fix :)
-		//free(node);
         }
         return 1;
     } else {
