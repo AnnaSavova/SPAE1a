@@ -201,7 +201,7 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
         while (1){
             if (strcmp(node->host,host) == 0) {
 				// attempt to fix
-				free(node);
+				//free(node);
 				return 0;
 			}
 
