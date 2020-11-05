@@ -58,7 +58,6 @@ void setBalance(TLDNode *n){
 
 TLDNode *rotateLeft(TLDNode *a){
     TLDNode *b = a->right;
-	//free(b->parent); hopefully it doesn't break everything
     b -> parent = a->parent;
 
     a->right = b->left;
@@ -200,16 +199,15 @@ TLDList *tldlist_create(Date *begin, Date *end){
 
 void tldlist_destroy(TLDList *tld){
     
-	// adding all the tld_list_add free() functions here:
 	delete_node(tld->root, tld);
 	free(tld);
 }
 
 int tldlist_add(TLDList *tld, char *hostname, Date *d){
-    //char *host;
+    char *host;
     if (date_compare(tld->begin, d) < 0 && date_compare(tld->end, d) > 0){
         char *host_orig = strrchr(hostname, '.');
-		char *host = (char *)malloc((strlen(host_orig)+1)*sizeof(char)); //replacement for line 171
+		//char *host = (char *)malloc((strlen(host_orig)+1)*sizeof(char)); //replacement for line 171
         if (strchr(host_orig,'.') != NULL){
             host = host_orig + 1;
         } else {
@@ -229,7 +227,6 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
         TLDNode *node = tld->root;
         while (1){
             if (strcmp(node->host,host) == 0) {
-				// attempt to fix
 				free(node);
 				return 0;
 			}
