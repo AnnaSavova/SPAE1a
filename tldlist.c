@@ -196,8 +196,8 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
 			free(root_orig);
         }
 
-        TLDNode *node = malloc(sizeof(TLDNode));
-        node = tld->root;
+        //TLDNode *node = malloc(sizeof(TLDNode));
+        TLDNode *node = tld->root;
         while (1){
             if (strcmp(node->host,host) == 0) {
 				// attempt to fix
