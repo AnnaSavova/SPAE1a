@@ -51,7 +51,7 @@ void reheight(TLDNode *node){
 
 void setBalance(TLDNode *n){
     reheight(n);
-    n->balance = (height(n->right) - height(n->left);
+    n->balance = height(n->right) - height(n->left);
 }
 
 TLDNode *rotateLeft(TLDNode *a){
