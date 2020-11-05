@@ -120,25 +120,25 @@ TLDNode *rotateRightThenLeft(TLDNode *n){
 
 void rebalance(TLDNode *n, TLDList *tld){
     setBalance(n);
-
-    if (n -> balance == -2){
-        if (height(n->left ->left) >= height(n->left->right)){
+	
+	if (n->balance == -2) {
+        if (height(n->left->left) >= height(n->left->right)){
             n = rotateRight(n);
-        } else {
+        } else{
             n = rotateLeftThenRight(n);
-        } else if (n -> balance == 2){
-			if (height(n->right->right) >= height(n->right->left)){
-				n = rotateLeft(n);
-			} else {
-				n = rotateRightThenLeft(n);
-			}
 		}
-		
-		if (n->parent != NULL) {
-			rebalance(n->parent, tld);
-		} else {
-			tld->root = n;
+    } else if (n.balance == 2) {
+        if (height(n.right.right) >= height(n.right.left)){
+            n = rotateLeft(n);
+        } else{
+            n = rotateRightThenLeft(n);
 		}
+    }
+ 
+    if (n.parent != null) {
+        rebalance(n->parent, tld);
+    } else {
+        tld->root = n;
     }
 }
 // End of helper functions
