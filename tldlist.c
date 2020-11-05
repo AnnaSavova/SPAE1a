@@ -31,11 +31,11 @@ struct tlditerator{
 
 // Start of helper functions:
 int height(TLDNode *n){
-	if (n == NULL){
-		return -1;
+	int curr_height = -1;
+	if (n != NULL){
+		curr_height = n->height;
 	}
-	// attempt to fix
-	int curr_height = n->height;
+	
 	return curr_height;
 }
 
