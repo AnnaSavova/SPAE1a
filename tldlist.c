@@ -89,7 +89,6 @@ TLDNode *rotateRight(TLDNode *a){
     b->parent = a->parent;
 
     a->left = b->right;
-
     if (a->left != NULL){
         a->left->parent = a;
     }
@@ -118,8 +117,7 @@ TLDNode *rotateLeftThenRight(TLDNode *n) {
 }
 
 TLDNode *rotateRightThenLeft(TLDNode *n){ //restored * to rotate
-	TLDNode *righ_child = n->right;
-    n->right = rotateRight(righ_child);
+    n->right = rotateRight(n->right);
     return rotateLeft(n);
 }
 
@@ -146,7 +144,7 @@ void rebalance(TLDNode *n, TLDList *tld){
         tld->root = n;
     }
 	// atempt fix
-	free(n);
+	//free(n);
 	
 }
 // End of helper functions
