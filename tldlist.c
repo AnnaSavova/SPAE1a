@@ -34,7 +34,9 @@ int height(TLDNode *n){
 	if (n == NULL){
 		return -1;
 	}
-	return n->height;
+	// attempt to fix
+	int curr_height = n->height;
+	return curr_height;
 }
 
 void reheight(TLDNode *node){
@@ -197,7 +199,11 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
         TLDNode *node = malloc(sizeof(TLDNode));
         node = tld->root;
         while (1){
-            if (strcmp(node->host,host) == 0) { return 0;}
+            if (strcmp(node->host,host) == 0) {
+				// attempt to fix
+				free(node);
+				return 0;
+			}
 
             TLDNode *parent_node = malloc(sizeof(TLDNode));
             parent_node = node;
@@ -223,6 +229,8 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
 				free(parent_node);
                 break;
             }
+		// attempt to fix
+		free(parent_node);
         }
         return 1;
     } else {

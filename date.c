@@ -29,7 +29,7 @@ Date *date_create(char *datestr){
 Date *date_duplicate(Date *d){
     Date *dupe = malloc(sizeof(Date));
     if (d == NULL) {
-		free(dupe);
+		date_destroy(dupe);
         return NULL;
     } else {
         dupe = d;
