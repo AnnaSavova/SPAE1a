@@ -127,15 +127,15 @@ void rebalance(TLDNode *n, TLDList *tld){
         } else{
             n = rotateLeftThenRight(n);
 		}
-    } else if (n.balance == 2) {
-        if (height(n.right.right) >= height(n.right.left)){
+    } else if (n->balance == 2) {
+        if (height(n->right->right) >= height(n->right->left)){
             n = rotateLeft(n);
         } else{
             n = rotateRightThenLeft(n);
 		}
     }
  
-    if (n.parent != null) {
+    if (n->parent != NULL) {
         rebalance(n->parent, tld);
     } else {
         tld->root = n;
