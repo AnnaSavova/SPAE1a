@@ -58,7 +58,7 @@ void setBalance(TLDNode *n){
 
 TLDNode *rotateLeft(TLDNode *a){
     TLDNode *b = a->right;
-	free(b->parent);
+	//free(b->parent); hopefully it doesn't break everything
     b -> parent = a->parent;
 
     a->right = b->left;
@@ -148,15 +148,15 @@ TLDList *tldlist_create(Date *begin, Date *end){
 
     if (date_compare(begin,end) < 0){
         TLDNode *root = NULL;
-        TLDList *new_list = malloc(sizeof(TLDList));
-		new_list -> begin = begin;
-        new_list -> end = end;
-        new_list -> root = root;
-        new_list -> count = 0;
-        if (new_list == NULL){
+        TLDList *tld = malloc(sizeof(TLDList));
+		tld -> begin = begin;
+        tld -> end = end;
+        tld -> root = root;
+        tld -> count = 0;
+        if (tld == NULL){
             return NULL;
         } else {
-            return new_list;
+            return tld;
         }
     } else {
         return NULL;
@@ -165,13 +165,19 @@ TLDList *tldlist_create(Date *begin, Date *end){
 
 void tldlist_destroy(TLDList *tld){
     free(tld);
+	// adding all the tld_list_add free() functions here:
+	free(host);
+	free(root_orig);
+	free(curr_node_left);
+	free(curr_node_right);
 }
 
 int tldlist_add(TLDList *tld, char *hostname, Date *d){
-    char *host;
+    //char *host;
     if (date_compare(tld->begin, d) < 0 && date_compare(tld->end, d) > 0){
         char *host_orig = strrchr(hostname, '.');
-        if (strchr(host_orig,'.') != NULL){ //host[0] == "."
+		char *host = (char *)malloc((strlen(host_orig)+1)*sizeof(char)); //replacement for line 171
+        if (strchr(host_orig,'.') != NULL){
             host = host_orig + 1;
         } else {
             host = host_orig;
@@ -184,7 +190,7 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
             root_orig -> right = NULL;
             tld -> root = root_orig;
             tld -> count += 1;
-			free(root_orig);
+			//free(root_orig);
         }
 
         TLDNode *node = tld->root;
@@ -206,13 +212,13 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
                     curr_node_left -> host = host;
                     curr_node_left -> parent = parent_node;
                     parent_node -> left = curr_node_left;
-					free(curr_node_left);
+					//free(curr_node_left);
                 } else {
                     TLDNode *curr_node_right = malloc(sizeof(TLDNode));
                     curr_node_right -> host = host;
                     curr_node_right -> parent = parent_node;
                     parent_node -> right = curr_node_right;
-					free(curr_node_right);
+					//free(curr_node_right);
                 }
                 tld -> count += 1;
                 rebalance(parent_node, tld);
