@@ -28,13 +28,14 @@ Date *date_create(char *datestr){
 }
 
 Date *date_duplicate(Date *d){
-    Date *dupe = (Date *)malloc(sizeof(Date));
-    if (d == NULL) {
+    Date* dupe = (Date *)malloc(sizeof(Date));
+    if (dupe == NULL) {
+        printf("Error message here.\n");
         return NULL;
     } else {
         *dupe = *d;
     }
-	return dupe;
+    return dupe;
 }
 
 int date_compare(Date *date1, Date *date2){
