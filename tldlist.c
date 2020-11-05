@@ -146,11 +146,14 @@ void rebalance(TLDNode *n, TLDList *tld){
 void delete_node(TLDNode *node, TLDList *tld){
 	if (node->left == NULL && node->right == null) {
 		if (node->parent == NULL){
+			free(tld->root);
 			tld->root = NULL;
 		} else {
 			if (node->parent->left == node) {
+				free(node->parent->left);
 				node->parent->left = NULL;
 			} else {
+				free(node->parent->right);
 				node->parent->right = NULL;
 			}
 			rebalance(node->parent, tld);
