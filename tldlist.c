@@ -117,7 +117,7 @@ TLDNode *rotateLeftThenRight(TLDNode *n) {
     return rotateRight(n);
 }
 
-TLDNode *rotateRightThenLeft(TLDNode *n){
+TLDNode rotateRightThenLeft(TLDNode *n){ //removed * from before rotate
     n->right = rotateRight;
     return rotateLeft(n);
 }
