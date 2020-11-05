@@ -142,6 +142,30 @@ void rebalance(TLDNode *n, TLDList *tld){
     }
 	
 }
+
+void delete_node(TLDNode *node, TLDList *tld){
+	if (node->left == NULL && node->right == null) {
+		if (node->parent == NULL){
+			tld->root = NULL;
+		} else {
+			if (node->parent->left == node) {
+				node->parent->left = NULL;
+			} else {
+				node->parent->right = NULL;
+			}
+			rebalance(node->parent, tld);
+		}
+		return;
+	}
+	
+	if (node->left != NULL){
+		while(node->left->right != NULL){
+			node->left = node->left->right;
+			node->host = node->left->host;
+			delete_node(node->left);
+		}
+	}
+}
 // End of helper functions
 
 TLDList *tldlist_create(Date *begin, Date *end){
@@ -170,7 +194,6 @@ void tldlist_destroy(TLDList *tld){
 	free(root_orig);
 	free(curr_node_left);
 	free(curr_node_right);
-	free(tld);
 }
 
 int tldlist_add(TLDList *tld, char *hostname, Date *d){
