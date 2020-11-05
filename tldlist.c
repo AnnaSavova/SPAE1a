@@ -205,8 +205,8 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
 				return 0;
 			}
 
-            TLDNode *parent_node = malloc(sizeof(TLDNode));
-            parent_node = node;
+            //TLDNode *parent_node = malloc(sizeof(TLDNode));
+            TLDNode *parent_node = node;
 
             bool goLeft = strcmp(node->host, host);
             node = goLeft ? node->left : node->right;
