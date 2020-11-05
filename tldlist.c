@@ -174,7 +174,7 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
         TLDNode *node = malloc(sizeof(TLDNode));
         node = tld->root;
         while (true){
-            if (strcmp(node.host,host) == 0) { return 0;}
+            if (strcmp(node->host,host) == 0) { return 0;}
 
             TLDNode *parent_node = malloc(sizeof(TLDNode));
             parent_node = node;
