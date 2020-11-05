@@ -76,7 +76,7 @@ TLDNode *rotateLeft(TLDNode *a){
 
     setBalance(a);
     setBalance(b);
-	free(a);
+	//free(a);
 
     return b;
 }
@@ -105,7 +105,7 @@ TLDNode *rotateRight(TLDNode *a){
 
     setBalance(a);
     setBalance(b);
-	free(a);
+	//free(a);
 
     return b;
 }
