@@ -193,10 +193,8 @@ TLDList *tldlist_create(Date *begin, Date *end){
 void tldlist_destroy(TLDList *tld){
     
 	// adding all the tld_list_add free() functions here:
-	free(host);
-	free(root_orig);
-	free(curr_node_left);
-	free(curr_node_right);
+	delete_node(tld->root, tld);
+	free(tld);
 }
 
 int tldlist_add(TLDList *tld, char *hostname, Date *d){
