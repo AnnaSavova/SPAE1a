@@ -78,7 +78,6 @@ TLDNode *rotateLeft(TLDNode *a){
 
     setBalance(a);
     setBalance(b);
-	//free(a);
 
     return b;
 }
@@ -106,7 +105,6 @@ TLDNode *rotateRight(TLDNode *a){
 
     setBalance(a);
     setBalance(b);
-	//free(a);
 
     return b;
 }
@@ -193,6 +191,7 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
             root_orig -> right = NULL;
             tld -> root = root_orig;
             tld -> count += 1;
+			free(root_orig);
         }
 
         TLDNode *node = malloc(sizeof(TLDNode));
@@ -216,11 +215,13 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
                     curr_node_left -> host = host;
                     curr_node_left -> parent = parent_node;
                     parent_node -> left = curr_node_left;
+					free(curr_node_left);
                 } else {
                     TLDNode *curr_node_right = malloc(sizeof(TLDNode));
                     curr_node_right -> host = host;
                     curr_node_right -> parent = parent_node;
                     parent_node -> right = curr_node_right;
+					free(curr_node_right);
                 }
                 tld -> count += 1;
                 rebalance(parent_node, tld);
@@ -230,6 +231,8 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
             }
 		// attempt to fix
 		free(parent_node);
+		// attempt to fix :)
+		free(node);
         }
         return 1;
     } else {
