@@ -30,13 +30,20 @@ struct tlditerator{
 };
 
 // Start of helper functions:
+int height(TLDNode *n){
+	if (n == NULL){
+		return -1;
+	}
+	return n->height;
+}
+
 void reheight(TLDNode *node){
     if (node != NULL){
         int curr_max_height = 0;
-        if (node->left->height > node->right->height){
-            curr_max_height = node->left->height;
+        if (height(node->left) > height(node->right)){
+            curr_max_height = height(node->left);
         } else {
-            curr_max_height = node->right->height;
+            curr_max_height = height(node->right);
         }
         node->height = 1 + curr_max_height;
     }
@@ -44,7 +51,7 @@ void reheight(TLDNode *node){
 
 void setBalance(TLDNode *n){
     reheight(n);
-    n->balance = (n->right->height - n->left->height);
+    n->balance = (height(n->right) - height(n->left);
 }
 
 TLDNode *rotateLeft(TLDNode *a){
@@ -115,12 +122,21 @@ void rebalance(TLDNode *n){
     setBalance(n);
 
     if (n -> balance == -2){
-        if (n->left ->left->height >= n->left->right->height){
+        if (height(n->left ->lef)t >= height(n->left->right)){
             n = rotateRight(n);
-        }
-        else {
+        } else {
             n = rotateLeftThenRight(n);
-        }
+        } else if (n -> balance == 2){
+			if (height(n->right->right) >= height(n->right->left)){
+				n = rotateLeft(n);
+			} else {
+				n = rotateRightThenLeft(n);
+			}
+		}
+		
+		if (n->parent != NULL) {
+			rebalance(n->parent);
+		}
     }
 }
 // End of helper functions
