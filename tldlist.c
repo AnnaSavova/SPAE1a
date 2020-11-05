@@ -58,6 +58,7 @@ void setBalance(TLDNode *n){
 
 TLDNode *rotateLeft(TLDNode *a){
     TLDNode *b = (TLDNode *)malloc(sizeof(TLDNode));
+	free(b); //what am i doing, who knows
     b = a->right;
 	free(b->parent); //attempt to fix ;( 
     b -> parent = a->parent;
