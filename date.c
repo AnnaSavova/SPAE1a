@@ -14,7 +14,7 @@ Date *date_create(char *datestr){
         int year = 0;
 
         /* check datestr is in the expected dd/mm/yyyy format and assign the information to the ints day,month and year respectively*/
-        sscanf(datestr,"%2d/%2d/%4d\n",&day,&month,&year);
+        sscanf(datestr,"%2d/%2d/%4d",&day,&month,&year);
 
         if (day >= 1 && day<= 31 && month >= 1 && month <= 12){
             Date *d = malloc(sizeof(Date));
