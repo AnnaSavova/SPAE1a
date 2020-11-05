@@ -142,6 +142,9 @@ void rebalance(TLDNode *n, TLDList *tld){
     } else {
         tld->root = n;
     }
+	// atempt fix
+	free(n);
+	
 }
 // End of helper functions
 
@@ -193,7 +196,7 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
 
         TLDNode *node = malloc(sizeof(TLDNode));
         node = tld->root;
-        while (true){
+        while (1){
             if (strcmp(node->host,host) == 0) { return 0;}
 
             TLDNode *parent_node = malloc(sizeof(TLDNode));
@@ -216,6 +219,8 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
                 }
                 tld -> count += 1;
                 rebalance(parent_node, tld);
+				// attempt to fix
+				free(parent_node);
                 break;
             }
         }
