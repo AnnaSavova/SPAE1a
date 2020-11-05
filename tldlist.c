@@ -32,7 +32,7 @@ struct tlditerator{
 // Start of helper functions:
 void reheight(TLDNode *node){
     if (node != NULL){
-        int curr_max_height = 0
+        int curr_max_height = 0;
         if (node->left->height > node->right->height){
             curr_max_height = node->left->height;
         } else {
@@ -87,7 +87,7 @@ TLDNode *rotateRight(TLDNode *a){
     b->right = a;
     a->parent = b;
 
-    if (b->parent != null){
+    if (b->parent != NULL){
         if (b->parent->right == a){
             b->parent->right = b;
         } else {
@@ -116,16 +116,16 @@ void rebalance(TLDNode *n){
 
     if (n -> balance == -2){
         if (n->left ->left->height >= n->left->right->height){
-            n = rotateRight(n)
+            n = rotateRight(n);
         }
         else {
-            n = rotateLeftThenRight(n)
+            n = rotateLeftThenRight(n);
         }
     }
 }
 // End of helper functions
 
-TLDList tldlist_create(Date *begin, Date *end){
+TLDList *tldlist_create(Date *begin, Date *end){
 
     if (date_compare(begin,end) < 0){
         TLDNode *root = NULL;
@@ -187,12 +187,12 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
                     TLDNode *curr_node_left = malloc(sizeof(TLDNode));
                     curr_node_left -> host = host;
                     curr_node_left -> parent = parent_node;
-                    parent_node -> left = *current_node_left;
+                    parent_node -> left = *curr_node_left;
                 } else {
                     TLDNode *curr_node_right = malloc(sizeof(TLDNode));
                     curr_node_right -> host = host;
                     curr_node_right -> parent = parent_node;
-                    parent_node -> right = *curr_node_right
+                    parent_node -> right = curr_node_right
                 }
                 tld -> count += 1;
                 rebalance(parent_node);
@@ -206,7 +206,7 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
 }
 
 long tldlist_count(TLDList *tld){
-    return tld -> count
+    return tld -> count;
 }
 
 TLDIterator *tldlist_iter_create(TLDList *tld){
@@ -221,11 +221,11 @@ TLDIterator *tldlist_iter_create(TLDList *tld){
     }
 }
 
-TLDIterator *tldlist_iter_next(TLDIterator *iter){
+TLDNode *tldlist_iter_next(TLDIterator *iter){
     if (iter->curr_node->left != NULL){
         return iter->curr_node->left;
     } else if (iter->curr_node->right != NULL){
-        return = iter->curr_node->right;
+        return iter->curr_node->right;
     } else {
         return NULL;
     }
@@ -255,9 +255,10 @@ void tld_traverse(TLDNode *node, char *desired_host,long count){
 }
 // end of helper method
 long tldnode_count(TLDNode *node){
-    node->count = 0;
-    char *desired_host = node->host
-    tld_traverse(node, desired_host, 0);
+	long count = 0;
+    node->count = count;
+    char *desired_host = node->host;
+    tld_traverse(node, desired_host, count);
     node->count = count;
     return node->count;
 }
