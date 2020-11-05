@@ -122,7 +122,7 @@ void rebalance(TLDNode *n){
     setBalance(n);
 
     if (n -> balance == -2){
-        if (height(n->left ->lef)t >= height(n->left->right)){
+        if (height(n->left ->left) >= height(n->left->right)){
             n = rotateRight(n);
         } else {
             n = rotateLeftThenRight(n);
