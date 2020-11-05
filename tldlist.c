@@ -85,8 +85,8 @@ TLDNode *rotateLeft(TLDNode *a){
 }
 
 TLDNode *rotateRight(TLDNode *a){
-    TLDNode *b = malloc(sizeof(TLDNode));
-    b = a->left;
+    //TLDNode *b = malloc(sizeof(TLDNode));
+    TLDNode *b = a->left;
     b->parent = a->parent;
 
     a->left = b->right;
