@@ -162,7 +162,7 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
             host = tolower(host_orig);
         }
 
-        if (tld.root == NULL) {
+        if (tld->root == NULL) {
             TLDNode *root_orig = malloc(sizeof(TLDNode));
             root_orig -> host = host;
             root_orig -> left = NULL;
@@ -187,12 +187,12 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
                     TLDNode *curr_node_left = malloc(sizeof(TLDNode));
                     curr_node_left -> host = host;
                     curr_node_left -> parent = parent_node;
-                    parent_node -> left = *curr_node_left;
+                    parent_node -> left = curr_node_left;
                 } else {
                     TLDNode *curr_node_right = malloc(sizeof(TLDNode));
                     curr_node_right -> host = host;
                     curr_node_right -> parent = parent_node;
-                    parent_node -> right = curr_node_right
+                    parent_node -> right = curr_node_right;
                 }
                 tld -> count += 1;
                 rebalance(parent_node);
