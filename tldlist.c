@@ -180,11 +180,11 @@ void tldlist_destroy(TLDList *tld){
 int tldlist_add(TLDList *tld, char *hostname, Date *d){
     char *host;
     if (date_compare(tld->begin, d) < 0 && date_compare(tld->end, d) > 0){
-        char *host_orig = strrchr(hostname, ".");
+        char *host_orig = strrchr(hostname, '.');
         if (strchr(host_orig,'.') != NULL){ //host[0] == "."
-            host = tolower(host_orig + 1);
+            host = host_orig + 1;
         } else {
-            host = tolower(host_orig);
+            host = host_orig;
         }
 
         if (tld->root == NULL) {
