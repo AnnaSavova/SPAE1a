@@ -76,6 +76,7 @@ TLDNode *rotateLeft(TLDNode *a){
 
     setBalance(a);
     setBalance(b);
+	free(a);
 
     return b;
 }
@@ -104,6 +105,7 @@ TLDNode *rotateRight(TLDNode *a){
 
     setBalance(a);
     setBalance(b);
+	free(a);
 
     return b;
 }
@@ -174,7 +176,7 @@ int tldlist_add(TLDList *tld, char *hostname, Date *d){
     char *host;
     if (date_compare(tld->begin, d) < 0 && date_compare(tld->end, d) > 0){
         char *host_orig = strrchr(hostname, ".");
-        if (host[0] == "."){
+        if (strchr(str,'.') != NULL){ //host[0] == "."
             host = tolower(host_orig + 1);
         } else {
             host = tolower(host_orig);
