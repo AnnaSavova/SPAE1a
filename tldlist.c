@@ -164,9 +164,17 @@ void delete_node(TLDNode *node, TLDList *tld){
 	if (node->left != NULL){
 		while(node->left->right != NULL){
 			node->left = node->left->right;
-			node->host = node->left->host;
-			delete_node(node->left, tld);
 		}
+		node->host = node->left->host;
+		free(node->left->host);
+		delete_node(node->left, tld);
+	} else {
+		while (node->right != NULL){
+			node->right = node->right->left;
+		}
+		node->host = node->right->host;
+		free(node->right->host);
+		delete_node(node->right, tld);
 	}
 }
 // End of helper functions
