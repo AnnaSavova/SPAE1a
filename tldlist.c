@@ -35,7 +35,7 @@ int height(TLDNode *n){
 		return -1;
 	}
 	// attempt to fix
-	int curr_height = n->height;
+	int curr_height = n.height; //replaced -> with .
 	return curr_height;
 }
 
